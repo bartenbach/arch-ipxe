@@ -1,14 +1,20 @@
 #!ipxe
 
-set arch x86_64
-set base-url https://mirrors.edge.kernel.org/archlinux/iso/latest
-
 ifopen net{{ INTERFACE_ID }}
 set net{{ INTERFACE_ID }}/ip {{ PUBLIC_IP }}
 set net{{ INTERFACE_ID }}/netmask 255.255.255.0
 set net{{ INTERFACE_ID }}/gateway {{ PUBLIC_GW }}
 set net{{ INTERFACE_ID }}/dns 8.8.8.8
 
-kernel ${base-url}/arch/boot/${arch}/vmlinuz-linux archisobasedir=arch archiso_http_srv=${base-url}/ initrd=initramfs-linux.img ip={{ PUBLIC_IP }}::{{ PUBLIC_GW }}:255.255.255.0::enp1s0f{{ INTERFACE_ID }}:off:8.8.8.8
-initrd ${base-url}/arch/boot/${arch}/initramfs-linux.img
-boot
+set cpuarch x86_64
+set extrabootoptions ip={{ PUBLIC_IP }}
+set release 2023.04.01
+set countrycode US
+set countryname United States
+set mirrorurl http://mirrors.kernel.org/archlinux/
+
+echo Booting Arch Linux x86_64 ${release} from ${mirrorurl}
+kernel ${mirrorurl}iso/${release}/arch/boot/x86_64/vmlinuz-linux
+initrd ${mirrorurl}iso/${release}/arch/boot/amd-ucode.img
+
+imgargs vmlinuz-linux initrd=amd-ucode.img initrd=initramfs-linux.img archiso_http_srv=${mirrorurl}iso/${release}/ archisobasedir=arch cms_verify=y ${extrabootoptions}
