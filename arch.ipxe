@@ -8,8 +8,8 @@ set net{{ INTERFACE_ID }}/netmask 255.255.255.0
 set net{{ INTERFACE_ID }}/gateway {{ PUBLIC_GW }}
 set net{{ INTERFACE_ID }}/dns 8.8.8.8
 
-set base-url http://mirror.us.leaseweb.net/archlinux/iso/latest
+set base-url https://mirrors.edge.kernel.org/archlinux/iso/latest
 kernel ${base-url}/arch/boot/${arch}/vmlinuz archisobasedir=arch archiso_http_srv=${base-url}/
-initrd ${base-url}/arch/boot/${arch}/archiso.img
+initrd ${base-url}/arch/boot/${arch}/initramfs-linux.img
 net.ifnames=0 biosdevname=0 ip={{ PUBLIC_IP }}::{{ PUBLIC_GW }}:255.255.255.0::eth{{ INTERFACE_ID }}:off:8.8.8.8
 boot
