@@ -9,6 +9,6 @@ set net{{ INTERFACE_ID }}/netmask 255.255.255.0
 set net{{ INTERFACE_ID }}/gateway {{ PUBLIC_GW }}
 set net{{ INTERFACE_ID }}/dns 8.8.8.8
 
-kernel ${base-url}/arch/boot/${arch}/vmlinuz-linux archisobasedir=arch archiso_http_srv=${base-url}/ initrd=initramfs-linux.img initrd=initrd.img ip={{ PUBLIC_IP }}::{{ PUBLIC_GW }}:255.255.255.0::enp1s0f{{ INTERFACE_ID }}:off:8.8.8.8
+kernel ${base-url}/arch/boot/${arch}/vmlinuz-linux archisobasedir=arch archiso_http_srv=${base-url}/ initrd=initramfs-linux.img ip={{ PUBLIC_IP }}::{{ PUBLIC_GW }}:255.255.255.0::enp1s0f{{ INTERFACE_ID }}:off:8.8.8.8
 initrd ${base-url}/arch/boot/${arch}/initramfs-linux.img
 boot
