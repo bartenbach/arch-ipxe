@@ -1,6 +1,7 @@
 #!ipxe
 
 set arch x86_64
+set base-url https://mirrors.edge.kernel.org/archlinux/iso/latest
 
 ifopen net{{ INTERFACE_ID }}
 set net{{ INTERFACE_ID }}/ip {{ PUBLIC_IP }}
@@ -8,8 +9,6 @@ set net{{ INTERFACE_ID }}/netmask 255.255.255.0
 set net{{ INTERFACE_ID }}/gateway {{ PUBLIC_GW }}
 set net{{ INTERFACE_ID }}/dns 8.8.8.8
 
-set base-url https://mirrors.edge.kernel.org/archlinux/iso/latest
-kernel ${base-url}/arch/boot/${arch}/vmlinuz-linux archisobasedir=arch archiso_http_srv=${base-url}/
+kernel ${base-url}/arch/boot/${arch}/vmlinuz-linux archisobasedir=arch archiso_http_srv=${base-url}/ initrd=initramfs-linux.img initrd=initrd.img ip={{ PUBLIC_IP }}::{{ PUBLIC_GW }}:255.255.255.0::enp1s0f{{ INTERFACE_ID }}:off:8.8.8.8
 initrd ${base-url}/arch/boot/${arch}/initramfs-linux.img
-net.ifnames=0 biosdevname=0 ip={{ PUBLIC_IP }}::{{ PUBLIC_GW }}:255.255.255.0::eth{{ INTERFACE_ID }}:off:8.8.8.8
 boot
