@@ -18,3 +18,4 @@ kernel ${mirrorurl}iso/${release}/arch/boot/x86_64/vmlinuz-linux
 initrd ${mirrorurl}iso/${release}/arch/boot/amd-ucode.img
 
 imgargs vmlinuz-linux initrd=amd-ucode.img initrd=initramfs-linux.img archiso_http_srv=${mirrorurl}iso/${release}/ archisobasedir=arch cms_verify=y ${extrabootoptions}
+boot
